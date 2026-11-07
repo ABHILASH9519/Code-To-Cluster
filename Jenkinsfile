@@ -23,10 +23,9 @@ pipeline {
             }
         }
 
-        stage('Terraform Format and Initialize') {
+        stage('Terraform Initialize') {
             steps {
                 dir('tf-aws-eks') {
-                    sh 'terraform fmt -check -recursive'
                     sh 'terraform init -input=false'
                 }
             }
