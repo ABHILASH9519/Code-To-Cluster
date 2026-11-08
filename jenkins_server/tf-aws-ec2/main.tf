@@ -33,43 +33,18 @@ module "sg" {
   description = "Security Group for Jenkins Server"
   vpc_id      = module.vpc.vpc_id
 
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 8080
-      to_port     = 8080
-      protocol    = "tcp"
-      description = "JenkinsPort"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 443
-      to_port     = 443
-      protocol    = "tcp"
-      description = "HTTPS"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 80
-      to_port     = 80
-      protocol    = "tcp"
-      description = "HTTP"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      description = "SSH"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 9000
-      to_port     = 9000
-      protocol    = "tcp"
-      description = "SonarQubePort"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
+  # Management ports are closed by default. Supply trusted CIDRs explicitly.
+  ingress_with_cidr_blocks = flatten([
+    for cidr in var.admin_cidrs : [
+      for port in [22, 80, 443, 8080, 9000] : {
+        from_port   = port
+        to_port     = port
+        protocol    = "tcp"
+        description = "Restricted management access"
+        cidr_blocks = cidr
+      }
+    ]
+  ])
 
   egress_with_cidr_blocks = [
     {
