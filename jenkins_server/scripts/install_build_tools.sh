@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Ref - https://www.jenkins.io/doc/book/installing/linux/
 # Installing jenkins
@@ -30,22 +31,18 @@ sudo yum install docker -y
 sudo usermod -a -G docker ec2-user
 sudo usermod -aG docker jenkins
 
-# Add group membership for the default ec2-user so you can run all docker commands without using the sudo command:
-id ec2-user
-newgrp docker
+# Group membership takes effect for new login sessions; user-data continues as root.
 
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 sudo systemctl status docker.service
 
-sudo chmod 777 /var/run/docker.sock
-
-# Run Docker Container of Sonarqube
-docker run -d  --name sonar -p 9000:9000 sonarqube:lts-community
+# Keep the Docker socket restricted to root and the docker group; never make it world-writable.
+sudo docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
 # Installing AWS CLI
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-sudo apt install unzip -y
+sudo yum install unzip -y
 unzip awscliv2.zip
 sudo ./aws/install
 
