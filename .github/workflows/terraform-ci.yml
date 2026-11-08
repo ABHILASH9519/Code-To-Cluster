@@ -24,5 +24,9 @@ jobs:
         run: terraform fmt -check -recursive
       - name: Initialize without remote state
         run: terraform -chdir=tf-aws-eks init -backend=false -input=false
-      - name: Validate Terraform configuration
+      - name: Validate EKS Terraform configuration
         run: terraform -chdir=tf-aws-eks validate
+      - name: Initialize Jenkins host configuration without remote state
+        run: terraform -chdir=jenkins_server/tf-aws-ec2 init -backend=false -input=false
+      - name: Validate Jenkins host Terraform configuration
+        run: terraform -chdir=jenkins_server/tf-aws-ec2 validate
