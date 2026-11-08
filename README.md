@@ -75,6 +75,10 @@ export AWS_ACCESS_KEY_ID=<Copy this from the credentials file downloaded>
 export AWS_SECRET_ACCESS_KEY=<Copy this from the credentials file downloaded>
 ```
 
+### Management access and security defaults
+
+The Jenkins host security group now denies inbound management traffic by default. Before a deliberate deployment, set `admin_cidrs` in your uncommitted tfvars file to one or more trusted IPv4 CIDR ranges (for example, your current office/VPN egress range with a `/32` mask). The allowlist covers SSH, HTTP/HTTPS, Jenkins (8080), and SonarQube (9000); do not use `0.0.0.0/0`. Keep the tfvars file private and review the Terraform plan before applying.
+
 ### **Stage 1: Configure and Build Jenkins Server**
 
 The first thing we have to do is to create a new key pair for login into the EC2 instance and create an S3 bucket for storing terraform state files. This is the only manual step we are doing.
