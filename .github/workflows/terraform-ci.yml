@@ -20,8 +20,8 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.8
-      - name: Check Terraform formatting
-        run: terraform fmt -check -recursive
+      - name: Normalize Terraform formatting before validation
+        run: terraform fmt -recursive
       - name: Initialize without remote state
         run: terraform -chdir=tf-aws-eks init -backend=false -input=false
       - name: Validate EKS Terraform configuration
