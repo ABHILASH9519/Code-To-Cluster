@@ -3,7 +3,8 @@
 
 # Creating a VPC
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~> 5.0"
 
   name = var.vpc_name
   cidr = var.vpc_cidr
@@ -27,7 +28,8 @@ module "vpc" {
 
 # SG
 module "sg" {
-  source = "terraform-aws-modules/security-group/aws"
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "~> 5.0"
 
   name        = var.jenkins_security_group
   description = "Security Group for Jenkins Server"
@@ -62,7 +64,8 @@ module "sg" {
 
 # EC2
 module "ec2_instance" {
-  source = "terraform-aws-modules/ec2-instance/aws"
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 5.0"
 
   name = var.jenkins_ec2_instance
 
