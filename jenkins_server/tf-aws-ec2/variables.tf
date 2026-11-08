@@ -47,3 +47,13 @@ variable "jenkins_ec2_instance" {
   description = "Instance Type"
   type        = string
 }
+variable "admin_cidrs" {
+  description = "Trusted IPv4 CIDR ranges allowed to reach Jenkins, SSH and SonarQube. Empty by default."
+  type        = list(string)
+  default     = []
+
+  validation {
+    condition     = alltrue([for cidr in var.admin_cidrs : can(cidrnetmask(cidr))])
+    error_message = "Every admin_cidrs entry must be a valid IPv4 CIDR range."
+  }
+}
