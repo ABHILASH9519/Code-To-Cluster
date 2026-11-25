@@ -1035,3 +1035,23 @@ Thank you for taking the time to work on this tutorial/labs. Let me know what yo
 #### Author by [Harshhaa Reddy](https://github.com/NotHarshhaa)
 
 ### Ensure to follow me on GitHub. Please star/share this repository
+
+
+## Technical walkthrough
+
+```mermaid
+sequenceDiagram
+    participant P0 as Terraform
+    participant P1 as Jenkins
+    participant P2 as EKS
+    participant P3 as Application
+    P0->>P1: Jenkins
+    P1->>P2: EKS
+    P2->>P3: Application
+```
+
+**Engineering review focus:** Infrastructure provisioning and delivery tutorial; requires configured AWS environment.
+
+This diagram is illustrative, not a recorded execution trace. Refer to the existing run instructions for verification.
+
+![Last commit](https://img.shields.io/github/last-commit/ABHILASH9519/Code-To-Cluster) ![Open issues](https://img.shields.io/github/issues/ABHILASH9519/Code-To-Cluster)
