@@ -1,5 +1,23 @@
 # From Scratch to Production: Deploying EKS Clusters and Applications with CI/CD using Jenkins and Terraform
 
+<!-- portfolio-visual-start -->
+## Engineering overview
+
+![Terraform](https://img.shields.io/badge/Stack-Terraform-176b99) ![Stars](https://img.shields.io/github/stars/ABHILASH9519/Code-To-Cluster)
+
+![Animated workflow](docs/portfolio-flow.svg)
+
+```mermaid
+flowchart LR
+  N0["Infrastructure"] --> N1["Jenkins"] --> N2["EKS"] --> N3["Application"]
+```
+
+Illustrative workflow: Infrastructure → Jenkins → EKS → Application. See the implementation and setup below for actual capabilities and prerequisites.
+
+[Developer profile](https://github.com/ABHILASH9519) · [Issues](https://github.com/ABHILASH9519/Code-To-Cluster/issues)
+<!-- portfolio-visual-end -->
+
+
 ![alt text](image.png)
 
 ## Streamlining EKS Deployment and CI/CD: A Step-by-Step Guide to Automating Application Delivery with Jenkins and Terraform
